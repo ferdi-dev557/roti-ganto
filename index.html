@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Roti Ganto - Kelezatan Tradisional</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #8b5e3c;
+      --secondary-color: #d4a373;
+      --bg-color: #fefae0;
+      --text-dark: #333;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+    
+    body { 
+      font-family: 'Poppins', sans-serif; 
+      margin: 0; 
+      background: var(--bg-color); 
+      color: var(--text-dark); 
+      scroll-behavior: smooth;
+    }
+
+    header { 
+      background: var(--white); 
+      padding: 20px; 
+      text-align: center; 
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 { 
+      font-family: 'Playfair Display', serif; 
+      color: var(--primary-color);
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    nav { display: flex; justify-content: center; gap: 25px; margin-top: 15px; }
+    nav a { 
+      color: var(--text-dark); 
+      text-decoration: none; 
+      font-weight: 600; 
+      font-size: 0.9rem;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2072&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
+    
+    h2 { 
+      text-align: center; 
+      font-family: 'Playfair Display', serif; 
+      font-size: 2.2rem; 
+      margin-bottom: 40px;
+      color: var(--primary-color);
+    }
+
+    /* PRODUK CARDS */
+    .products { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 30px; 
+    }
+    .card { 
+      background: var(--white); 
+      border-radius: 15px; 
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+      transition: transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover { transform: translateY(-10px); }
+    .card img { width: 100%; height: 250px; object-fit: cover; }
+    .card-content { padding: 20px; text-align: center; flex-grow: 1; }
+    .price { display: block; font-weight: 600; color: var(--primary-color); margin-bottom: 15px; font-size: 1.2rem; }
+
+    .btn { 
+      background: var(--primary-color); 
+      color: var(--white); 
+      padding: 12px 25px; 
+      border: none; 
+      border-radius: 30px; 
+      cursor: pointer; 
+      font-weight: 600;
+      transition: 0.3s;
+      width: 100%;
+    }
+    .btn:hover { background: var(--secondary-color); }
+
+    /* FORM SECTION */
+    .booking-section { background: var(--white); padding: 60px 0; }
+    .form-container { max-width: 600px; margin: auto; padding: 20px; }
+    label { font-size: 0.8rem; font-weight: 600; color: #888; text-transform: uppercase; display: block; margin-top: 15px; }
+    input, select, textarea { 
+      width: 100%; padding: 12px; margin-top: 5px; 
+      border-radius: 8px; border: 1px solid #eee; 
+      background: #f9f9f9; font-family: inherit;
+    }
+
+    /* MULTI RASA GRID */
+    .rasa-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .rasa-item { text-align: center; }
+    .rasa-item input { text-align: center; font-weight: bold; border: 1px solid var(--secondary-color); }
+
+    #totalBayar { 
+      font-weight: bold; color: var(--primary-color); 
+      margin: 20px 0; text-align: center; font-size: 1.2rem; 
+    }
+
+    footer { background: var(--primary-color); color: white; text-align: center; padding: 40px 20px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Roti Ganto</h1>
+    <nav>
+      <a href="#produk">Produk</a>
+      <a href="#pesan">Pesan</a>
+      <a href="#lokasi">Lokasi</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Freshly Baked Everyday</h2>
+    <p>Nikmati kelembutan roti legendaris dengan isian melimpah.</p>
+  </section>
+
+  <div class="container" id="produk">
+    <h2>Varian Favorit</h2>
+    <div class="products">
+      <div class="card">
+        <img src="img/Roti_Sarikaya.png" alt="Roti Srikaya">
+        <div class="card-content">
+          <h3>Roti Sarikaya</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Coklat.png" alt="Roti Coklat">
+        <div class="card-content">
+          <h3>Roti Coklat</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Kelapa.png" alt="Roti Kelapa">
+        <div class="card-content">
+          <h3>Roti Kelapa</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Blueberry.png" alt="Roti Blueberry">
+        <div class="card-content">
+          <h3>Roti Bluebrry</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Kacang_Ijo_Gepeng.png" alt="Roti Kacang Ijo Gepeng">
+        <div class="card-content">
+          <h3>Roti Kacang Ijo Gepeng</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Keju.png" alt="Roti Keju">
+        <div class="card-content">
+          <h3>Roti Keju</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Nanas.png" alt="Roti Nanas">
+        <div class="card-content">
+          <h3>Roti Nanas</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Sosis.png" alt="Roti Sosis">
+        <div class="card-content">
+          <h3>Roti Sosis</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Stroberi.png" alt="Roti Stroberi">
+        <div class="card-content">
+          <h3>Roti Stroberi</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Roti_Tawar.png" alt="Roti Tawar">
+        <div class="card-content">
+          <h3>Roti Tawar</h3>
+          <span class="price">Rp 12.000</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/Donat.png" alt="Donat">
+        <div class="card-content">
+          <h3>Donat</h3>
+          <span class="price">Rp 1.700</span>
+          <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="booking-section" id="pesan">
+    <div class="form-container">
+      <h2>Formulir Pemesanan</h2>
+      <form onsubmit="kirimWA(event)">
+        
+        <label>Status Pelanggan</label>
+        <select id="statusPelanggan">
+          <option value="Saya pelanggan baru">Saya pelanggan baru</option>
+          <option value="Saya pelanggan yang pernah membeli sebelumnya">Saya pelanggan yang pernah membeli sebelumnya</option>
+        </select>
+
+        <label>Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Nama Anda" required />
+        
+        <label>Nomor WhatsApp</label>
+        <input type="tel" id="nomorWA" placeholder="0812..." required />
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="alamat@email.com" required />
+
+        <label>Jumlah Pesanan Per Rasa (Rp 1.700/pcs)</label>
+        <div class="rasa-grid">
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Coklat</label>
+            <input type="number" id="jmlCoklat" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Kelapa</label>
+            <input type="number" id="jmlKelapa" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Srikaya</label>
+            <input type="number" id="jmlSrikaya" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Blueberry</label>
+            <input type="number" id="jmlBlueberry" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">kacang ijo gepeng</label>
+            <input type="number" id="jmlKacang_Ijo_Gepeng" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Keju</label>
+            <input type="number" id="jmlKeju" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Nanas</label>
+            <input type="number" id="jmlNanas" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Sosis</label>
+            <input type="number" id="jmlSosis" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Stroberi</label>
+            <input type="number" id="jmlStroberi" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Tawar</label>
+            <input type="number" id="jmlTawar" min="0" value="0" oninput="hitungTotal()">
+          </div>
+          <div class="rasa-item">
+            <label style="font-size: 0.6rem;">Donat</label>
+            <input type="number" id="jmlDonat" min="0" value="0" oninput="hitungTotal()">
+          </div>
+        </div>
+
+        <label>Metode Pengambilan</label>
+        <select id="metodeAmbil">
+          <option value="Diantar">Diantar</option>
+          <option value="Ambil di toko">Ambil di toko</option>
+        </select>
+        
+        <label>Alamat Pengiriman</label>
+        <textarea id="alamat" rows="2" placeholder="Isi jika diantar"></textarea>
+
+        <label>Tanggal Pengiriman</label>
+        <input type="date" id="tglKirim" required />
+
+        <label>Metode Pembayaran</label>
+        <select id="metodeBayar">
+          <option value="Tunai">Tunai (COD)</option>
+          <option value="Transfer">Transfer</option>
+        </select>
+
+        <label>Catatan Tambahan</label>
+        <textarea id="komentar" rows="2" placeholder="Pertanyaan atau komentar..."></textarea>
+
+        <div id="totalBayar">Estimasi Total: Rp 0</div>
+        
+        <button class="btn" type="submit">Konfirmasi via WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="container" id="lokasi">
+    <h2>Lokasi Kami</h2>
+    <div style="width: 100%; border-radius: 15px; overflow: hidden; height: 350px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.333811009988!2d100.3610891!3d-0.8929282000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2fd4b95e742c0a89%3A0x9e4041805227d59c!2sPabrik%20Roti%20Ganto%20Padang!5e0!3m2!1sid!2sid!4v1777229965246!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
+  </div>
+
+  <footer>
+    <p><strong>Lokasi:</strong> Jl. Padang, Kurao Pagang, Kec. Nanggalo, Kota Padang</p>
+    <p>© 2026 Roti Ganto.</p>
+  </footer>
+
+  <script>
+   const hargaRoti = { biasa : 1700, tawar : 12000}
+   
+    function fokusPesan() {
+        document.getElementById('pesan').scrollIntoView({ behavior: 'smooth' });
+    }
+    function hitungTotal() {
+        const c = parseInt(document.getElementById('jmlCoklat').value) || 0;
+        const k = parseInt(document.getElementById('jmlKelapa').value) || 0;
+        const s = parseInt(document.getElementById('jmlSrikaya').value) || 0;
+        const b = parseInt(document.getElementById('jmlBlueberry').value) || 0;
+        const ki = parseInt(document.getElementById('jmlKacang_Ijo_Gepeng').value) || 0;
+        const kj = parseInt(document.getElementById('jmlKeju').value) || 0;
+        const n = parseInt(document.getElementById('jmlNanas').value) || 0;
+        const so = parseInt(document.getElementById('jmlSosis').value) || 0;
+        const st = parseInt(document.getElementById('jmlStroberi').value) || 0;
+        const t = parseInt(document.getElementById('jmlTawar').value) || 0;
+        const d = parseInt(document.getElementById('jmlDonat').value) || 0;
+        const total = ((c + k + s + b + ki + kj + n + so + st + d) * hargaRoti.biasa) + (t * hargaRoti.tawar);
+        document.getElementById('totalBayar').innerText = `Estimasi Total: Rp ${total.toLocaleString('id-ID')}`;
+    }
+
+    async function kirimWA(e) {
+        e.preventDefault();
+        const GFORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdzjxfpZPm0NM7j4uzwawSih2IM_01vTsqnIJicEuqZt-SCxg/formResponse";        
+        const c = document.getElementById('jmlCoklat').value;
+        const k = document.getElementById('jmlKelapa').value;
+        const s = document.getElementById('jmlSrikaya').value;
+        const b = document.getElementById('jmlBlueberry').value;
+        const ki = document.getElementById('jmlKacang_Ijo_Gepeng').value;
+        const kj = document.getElementById('jmlKeju').value;
+        const n = document.getElementById('jmlNanas').value;
+        const so = document.getElementById('jmlSosis').value;
+        const st = document.getElementById('jmlStroberi').value;
+        const t = document.getElementById('jmlTawar').value;
+        const d = document.getElementById('jmlDonat').value;
+
+        if ((parseInt(c) + parseInt(k) + parseInt(s) + parseInt(b) 
+            + parseInt(ki) + parseInt(kj) + parseInt(n) + parseInt(so)
+            + parseInt(st) + parseInt(t) + parseInt(d)) === 0) {
+            alert("Silakan isi jumlah roti yang ingin dipesan!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('entry.1000057', document.getElementById('statusPelanggan').value);
+        formData.append('entry.1000027', document.getElementById('nama').value);
+        formData.append('entry.631562715', document.getElementById('nomorWA').value);
+        formData.append('entry.518177218', document.getElementById('email').value);
+        
+        // Logika Multi-Rasa GForm
+        if (c > 0) {
+            formData.append('entry.967112212', 'Roti Coklat');
+            formData.append('entry.1804025834', c);
+        }
+        if (k > 0) {
+            formData.append('entry.967112212', 'Roti Kelapa');
+            formData.append('entry.1248635109', k);
+        }
+        if (s > 0) {
+            formData.append('entry.967112212', 'Roti Sarikaya');
+            formData.append('entry.2141742050', s);
+        }
+        if (b > 0) {
+            formData.append('entry.967112212', 'Roti Blueberry');
+            formData.append('entry. 947253911', b);
+        }
+        if (ki > 0) {
+            formData.append('entry.967112212', 'Roti Kacang Ijo Gepeng');
+            formData.append('entry.1585141028', ki);
+        }
+        if (kj > 0) {
+            formData.append('entry.967112212', 'Roti Keju');
+            formData.append('entry.1632263638', kj);
+        }
+        if (n > 0) {
+            formData.append('entry.967112212', 'Roti Nanas');
+            formData.append('entry.1741657137', n);
+        }
+        if (so > 0) {
+            formData.append('entry.967112212', 'Roti Sosis');
+            formData.append('entry.955602958', so);
+        }
+        if (st > 0) {
+            formData.append('entry.967112212', 'Roti Stroberi');
+            formData.append('entry.975638991', st);
+        }
+        if (t > 0) {
+            formData.append('entry.967112212', 'Roti Tawar');
+            formData.append('entry.2021088805', t);
+        }
+        if (d > 0) {
+            formData.append('entry.967112212', 'Roti Donat');
+            formData.append('entry.746700824', d);
+        }
+
+        formData.append('entry.1000026', document.getElementById('metodeAmbil').value);
+        formData.append('entry.2136837122', document.getElementById('alamat').value);
+        formData.append('entry.1495850646', document.getElementById('tglKirim').value);
+        formData.append('entry.642487049', document.getElementById('metodeBayar').value);
+        formData.append('entry.1000023', document.getElementById('komentar').value);
+
+        fetch(GFORM_URL, { method: 'POST', mode: 'no-cors', body: formData });
+
+        let rincian = "";
+        if (c > 0) rincian += `- Coklat: ${c} pcs%0A`;
+        if (k > 0) rincian += `- Kelapa: ${k} pcs%0A`;
+        if (s > 0) rincian += `- Srikaya: ${s} pcs%0A`;
+        if (b > 0) rincian += `- Blueberry: ${b} pcs%0A`;
+        if (ki > 0) rincian += `- Kacang ijo gepeng: ${ki} pcs%0A`;
+        if (kj > 0) rincian += `- Keju: ${kj} pcs%0A`;
+        if (n > 0) rincian += `- Nanas: ${n} pcs%0A`;
+        if (so > 0) rincian += `- Sosis: ${so} pcs%0A`;
+        if (st > 0) rincian += `- Stroberi: ${st} pcs%0A`;
+        if (t > 0) rincian += `- Tawar: ${t} pcs%0A`;
+        if (d > 0) rincian += `- Donat: ${d} pcs%0A`;
+
+        const totalFinal = ((parseInt(c||0) + parseInt(k||0) + parseInt(s||0) + parseInt(b||0)
+        + parseInt(ki||0) + parseInt(kj||0) + parseInt(n||0) + parseInt(so||0) + parseInt(st||0)
+        + parseInt(d||0)) * hargaRoti.biasa) + (parseInt(t||0) * hargaRoti.tawar);
+        const noOwner = '6281276216212';
+        const pesan = `Halo Roti Ganto, Pesanan Baru!%0A%0A` +
+                `*Nama:* ${document.getElementById('nama').value}%0A` +
+                `*Rincian:*%0A${rincian}` +
+                `*Total:* Rp ${totalFinal.toLocaleString('id-ID')}%0A` +
+                `*Alamat:* ${document.getElementById('alamat').value}%0A` +
+                `*Tgl pengiriman:* ${document.getElementById('tglKirim').value}%0A` +
+                `----------------------------------%0A` +
+               `*PENTING:* Mohon lampirkan *FOTO BUKTI TRANSFER* di bawah ini untuk mempercepat proses pesanan. Terima kasih! 🙏`;
+
+        window.open(`https://wa.me/${noOwner}?text=${pesan}`, '_blank');
+    }
+  </script>
+</body>
+</html>
