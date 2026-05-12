@@ -183,7 +183,7 @@
       <div class="card">
         <img src="img/Roti_Blueberry.png" alt="Roti Blueberry">
         <div class="card-content">
-          <h3>Roti Bluebrry</h3>
+          <h3>Roti Blueberry</h3>
           <span class="price">Rp 1.700</span>
           <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
         </div>
@@ -232,7 +232,7 @@
         <img src="img/Roti_Tawar.png" alt="Roti Tawar">
         <div class="card-content">
           <h3>Roti Tawar</h3>
-          <span class="price">Rp 12.000</span>
+          <span class="price roti-tawar">Rp 12.000</span>
           <button class="btn" onclick="fokusPesan()">Pilih Produk</button>
         </div>
       </div>
@@ -380,6 +380,9 @@
   </footer>
 
  <script>
+  function fokusPesan() {
+    document.getElementById("pesan").scrollIntoView({ behavior: "smooth" });
+  }
         let hargaSekarang = 2000; 
 
         function updateHargaDasar() {
@@ -389,6 +392,10 @@
             labelHarga.forEach(el => {
                 el.innerText = `Rp ${hargaSekarang.toLocaleString('id-ID')}`;
             });
+             // Roti tawar tetap
+    document.querySelectorAll('.roti-tawar').forEach(el => {
+        el.innerText = `Rp 12.000`;
+      });
             hitungTotal();
           }
     function hitungTotal() {
@@ -434,6 +441,12 @@
         formData.append('entry.1000027', document.getElementById('nama').value);
         formData.append('entry.631562715', document.getElementById('nomorWA').value);
         formData.append('entry.518177218', document.getElementById('email').value);
+
+        const noWA = document.getElementById('nomorWA').value;
+        if (!noWA.startsWith("08") || noWA.length < 10) {
+          alert("Nomor WhatsApp tidak valid!");
+          return;
+        }
         
         // Logika Multi-Rasa GForm
         if (c > 0) {
@@ -486,6 +499,13 @@
         formData.append('entry.1495850646', document.getElementById('tglKirim').value);
         formData.append('entry.642487049', document.getElementById('metodeBayar').value);
         formData.append('entry.1000023', document.getElementById('komentar').value);
+
+        const metode = document.getElementById('metodeAmbil').value;
+        const alamat = document.getElementById('alamat').value;
+        if (metode === "Diantar" && alamat.trim() === "") {
+          alert("Alamat wajib diisi untuk pengiriman!");
+          return;
+        }
 
         fetch(GFORM_URL, { method: 'POST', mode: 'no-cors', body: formData });
 
