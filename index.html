@@ -243,6 +243,16 @@
           <option value="Saya pelanggan yang pernah membeli sebelumnya">Saya pelanggan yang pernah membeli sebelumnya</option>
         </select>
 
+        <label>Kategori Pelanggan</label>
+            <div style="display: flex; gap: 20px; margin: 10px 0;">
+                <label style="display: flex; align-items: center; gap: 5px; color: var(--text-dark); text-transform: none; margin : 0;">
+                    <input type="radio" name="kategori" value="Umum" checked onclick="updateHargaDasar()" style="width: auto;"> Umum (Rp 2.000)
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px; color: var(--text-dark); text-transform: none; margin : 0;">
+                    <input type="radio" name="kategori" value="Mitra" onclick="updateHargaDasar()" style="width: auto;"> Mitra (Rp 1.700)
+                </label>
+            </div>
+
         <label>Nama Lengkap</label>
         <input type="text" id="nama" placeholder="Nama Anda" required />
         
@@ -340,12 +350,18 @@
     <p>© 2026 Roti Ganto.</p>
   </footer>
 
-  <script>
-   const hargaRoti = { biasa : 1700, tawar : 12000}
-   
-    function fokusPesan() {
-        document.getElementById('pesan').scrollIntoView({ behavior: 'smooth' });
-    }
+ <script>
+        let hargaSekarang = 2000; 
+
+        function updateHargaDasar() {
+            const kategori = document.querySelector('input[name="kategori"]:checked').value;
+            hargaSekarang = (kategori === "Mitra") ? 1700 : 2000;
+            const labelHarga = document.querySelectorAll('.price');
+            labelHarga.forEach(el => {
+                el.innerText = `Rp ${hargaSekarang.toLocaleString('id-ID')}`;
+            });
+            hitungTotal();
+          }
     function hitungTotal() {
         const c = parseInt(document.getElementById('jmlCoklat').value) || 0;
         const k = parseInt(document.getElementById('jmlKelapa').value) || 0;
@@ -358,7 +374,7 @@
         const st = parseInt(document.getElementById('jmlStroberi').value) || 0;
         const t = parseInt(document.getElementById('jmlTawar').value) || 0;
         const d = parseInt(document.getElementById('jmlDonat').value) || 0;
-        const total = ((c + k + s + b + ki + kj + n + so + st + d) * hargaRoti.biasa) + (t * hargaRoti.tawar);
+        const total = ((c + k + s + b + ki + kj + n + so + st + d) * hargaSekarang) + (t * 12000);
         document.getElementById('totalBayar').innerText = `Estimasi Total: Rp ${total.toLocaleString('id-ID')}`;
     }
 
@@ -405,7 +421,7 @@
         }
         if (b > 0) {
             formData.append('entry.967112212', 'Roti Blueberry');
-            formData.append('entry. 947253911', b);
+            formData.append('entry.947253911', b);
         }
         if (ki > 0) {
             formData.append('entry.967112212', 'Roti Kacang Ijo Gepeng');
@@ -459,7 +475,7 @@
 
         const totalFinal = ((parseInt(c||0) + parseInt(k||0) + parseInt(s||0) + parseInt(b||0)
         + parseInt(ki||0) + parseInt(kj||0) + parseInt(n||0) + parseInt(so||0) + parseInt(st||0)
-        + parseInt(d||0)) * hargaRoti.biasa) + (parseInt(t||0) * hargaRoti.tawar);
+        + parseInt(d||0)) * hargaSekarang) + (parseInt(t||0) * 12000);
         const noOwner = '6281276216212';
         const pesan = `Halo Roti Ganto, Pesanan Baru!%0A%0A` +
                 `*Nama:* ${document.getElementById('nama').value}%0A` +
@@ -472,6 +488,9 @@
 
         window.open(`https://wa.me/${noOwner}?text=${pesan}`, '_blank');
     }
+    document.addEventListener("DOMContentLoaded", function() {
+    updateHargaDasar();
+});
   </script>
 </body>
 </html>
