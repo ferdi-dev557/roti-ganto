@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+
+    .logo-halal-hero {
+  width: 80px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+}
     :root {
       --primary-color: #8b5e3c;
       --secondary-color: #d4a373;
@@ -149,9 +155,10 @@
   </header>
 
   <section class="hero">
-    <h2>Freshly Baked Everyday</h2>
-    <p>Nikmati kelembutan roti legendaris dengan isian melimpah.</p>
-  </section>
+  <img src="img/pngwing.com.png" alt="pngwing.com.png" class="logo-halal-hero">
+  <h2>Freshly Baked Everyday</h2>
+  <p>Nikmati kelembutan roti legendaris dengan isian melimpah.</p>
+</section>
 
   <div class="container" id="produk">
     <h2>Varian Favorit</h2>
@@ -438,6 +445,7 @@
 
         const formData = new FormData();
         formData.append('entry.1000057', document.getElementById('statusPelanggan').value);
+        formData.append('entry.1064857472', document.querySelector('input[name="kategori"]:checked').value);
         formData.append('entry.1000027', document.getElementById('nama').value);
         formData.append('entry.631562715', document.getElementById('nomorWA').value);
         formData.append('entry.518177218', document.getElementById('email').value);
@@ -528,10 +536,15 @@
         const noOwner = '6281276216212';
         const pesan = `Halo Roti Ganto, Pesanan Baru!%0A%0A` +
                 `*Nama:* ${document.getElementById('nama').value}%0A` +
+                `kategori pelanggan: ${document.querySelector('input[name="kategori"]:checked').value}%0A` +
+                `*Email:* ${document.getElementById('email').value}%0A` +
                 `*Rincian:*%0A${rincian}` +
                 `*Total:* Rp ${totalFinal.toLocaleString('id-ID')}%0A` +
                 `*Alamat:* ${document.getElementById('alamat').value}%0A` +
                 `*Tgl pengiriman:* ${document.getElementById('tglKirim').value}%0A` +
+                `*Metode Pengambilan:* ${document.getElementById('metodeAmbil').value}%0A` +
+                `*Metode Pembayaran:* ${document.getElementById('metodeBayar').value}%0A` +
+                `*Catatan:* ${document.getElementById('komentar').value}%0A` +
                 `----------------------------------%0A` +
                `*PENTING:* Mohon lampirkan *FOTO BUKTI TRANSFER* di bawah ini untuk mempercepat proses pesanan. Terima kasih! 🙏`;
 
